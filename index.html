@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/pq-juploader-css.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="js/vendor/jquery.ui.widget.js"></script>
+	<script src="js/jquery.iframe-transport.js"></script>
+	<script src="js/jquery.fileupload.js"></script>
+</head>
+<body>
+
+<div class="pq-juploader">
+	<div class="pq-sidebar">
+		<ul>
+			<li>
+				<a href="" title="" alt="">Insert Media</a>
+			</li>
+			<li>
+				<a href="" title="" alt="">Get from Library</a>
+			</li>
+			<li>
+				<a href="" title="" alt="">Insert from URL</a>
+			</li>
+		</ul>
+	</div>
+	<div id="pq-main">
+		<div id="pq-insert">
+			<div class="pq-head">
+				<h2>Insert media</h2>
+			</div>
+			<div class="pq-content">
+				
+				<h3>Drop files anywhere to upload</h3>
+				<input id="fileupload" type="file" name="files[]" multiple class="" data-url="php/"/>Select Files
+				<img src="" id="img_pre" />
+			</div>
+		</div>
+
+		<div id="pq-library" style="">
+			<div class="pq-head">
+				<h2>Lybrary</h2>
+			</div>
+			<div class="pq-content">
+				<div id="pq-pics-wrap">
+					<ul>
+						<li>
+							<div class="">
+								<img src="http://localhost/jUploader/php/files/buoi-sang-cua-biker-13.jpg"/>
+							</div>
+						</li>
+
+						
+					<ul>
+				</div>
+				<div id="pq-pics-info">
+				</div>
+			</div>
+		</div>
+
+		<div id="pq-url" style="display:none">
+			<div class="pq-head">
+				<h2>Insert from URL</h2>
+			</div>
+			<div class="pq-content">
+				<h3>Drop files anywhere to upload</h3>
+				<button class="">Select Files</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script>
+	$(function () {
+	    $('#fileupload').fileupload({
+	        dataType: 'json',
+	        add: function (e, data) {
+	        	$.each(data.files, function(index, file){
+	        		console.log(file);
+	        		$('#pq-pics-wrap>ul').prepend('<li class="append"><div>loading...</div></li>');
+	        	});
+	           
+	            data.submit();
+	               
+	        },
+	        done: function (e, data) {
+	            $.each(data.result.files, function (index, file) {
+	                $('<p/>').text(file.name).appendTo(document.body);
+	                $('#img_pre').attr('src',file.url)
+	            });
+	        }
+	    });
+	});
+</script
+</body>
+</html>
